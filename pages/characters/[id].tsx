@@ -12,6 +12,7 @@ function CharacterPage({ character }: { character: Character }) {
   return (
     <div className={styles.container}>
       <h1>{character.name}</h1>
+      <p>{character.id}</p>
 
       <Image
         loader={imageLoader}

@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
@@ -39,15 +39,29 @@ const Home: NextPage<{ characters: Character[] }> = ({ characters }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const res = await fetch("https://rickandmortyapi.com/api/character");
-  const { results }: GetCharacterResults = await res.json();
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const res = await fetch(
+      `https://rickandmortyapi.com/api/character`
+  );
+  const { results }: GetCharacterResults  = await res.json();
 
   return {
     props: {
-      characters: results,
+      characters: results ,
     },
   };
 };
+
+// export const getStaticProps: GetStaticProps = async (context) => {
+//   const res = await fetch("https://rickandmortyapi.com/api/character");
+//   const { results }: GetCharacterResults = await res.json();
+//
+//   return {
+//     props: {
+//       characters: results,
+//     },
+//   };
+// };
 
 export default Home;
